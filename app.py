@@ -14,11 +14,11 @@ def show_story_form():
     """at the load of the home page, get the fields needed to initialize
         as silly story instance, to show a respective prompts form"""
 
-    required_questions = silly_story.prompts
+    prompts = silly_story.prompts
 
     return render_template(
         "questions.jinja",
-        prompts=required_questions
+        prompts=prompts
     )
 
 
@@ -30,10 +30,10 @@ def show_completed_story():
 
     answers = {}
     for promt in silly_story.prompts:
+        # NOTE: can pass request.args to get_result_text (request.args is dictionary-like)
+        # for loop still potentially good for error-handling 
         input = request.args[promt]
         answers[promt] = input
-
-    print("answers", answers)
 
     story_text = silly_story.get_result_text(answers)
 
