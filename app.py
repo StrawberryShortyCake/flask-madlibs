@@ -35,9 +35,9 @@ def show_completed_story():
         input = request.args[promt]
         answers[promt] = input
 
-    story_text = silly_story.get_result_text(answers)
+    story = silly_story.get_result_text(answers)
 
     return render_template(
         "results.jinja",
-        story=story_text
+        story=story
     )
